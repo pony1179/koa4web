@@ -1,0 +1,22 @@
+{
+  "name": "koa4browser",
+  "version": "1.0.0",
+  "description": "简单来说，这是koa在浏览器端的实现，用来在去中心化应用开发过程中，使开发者获得开发传统B/S应用的开发体验。这个想法脱胎于FinChain IM的express4browser,用以解决FinchainIM 开发过程中一些不好的体验，比如作为一个纯Nodejs开发者，去做一些页面开发，显然是会遇到很多麻烦，而对于一个擅长前端开发的同学，去做一些底层逻辑上的处理，同样会显得吃力；另外从分层角度讲，负责UI的同学只需要负责做好页面，然后在页面中调用底层提供的类Restful规范接口，比如建立一个RTC链接，只需要告诉底层我要连接谁，剩下的由底层去负责完成。这样开发效率会显著提高，不同人员也能够各司其职，做自己擅长的事情，减少内耗。\r 由于express4browser与FinchainIM高度耦合，不能作为一个可用的package抽离出来供大家使用，所以最近研究了大量的koa/express及其插件的源码，认为koa的设计更加优雅，所以希望重新抽离出一个可用的，无依赖的纯JS package。",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BioforestChain/koa4browser.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/BioforestChain/koa4browser/issues"
+  },
+  "homepage": "https://github.com/BioforestChain/koa4browser#readme",
+  "workspaces": [
+    "../event-emitter"
+  ]
+}
