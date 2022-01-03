@@ -17,11 +17,11 @@ export class Router implements RouterModule.RouterInterface{
         // })
     }
 
-    register(path: string | string[], methods: RouterModule.method[], middleware: RouterModule.middleware | RouterModule.middleware[], opts?: RouterModule.opts) {
+    register(path: string | string[], methods: RouterModule.method[], middleware: RouterModule.middleware | RouterModule.middleware[]) {
         let router = this;
         if (Array.isArray(path)) {
             for (let i = 0; i < path.length; i++) {
-                this.register.call(this, path[i], methods, middleware, opts)
+                this.register.call(this, path[i], methods, middleware)
             }
         }
         let middlewares = Array.prototype.slice.call(arguments, 2);
@@ -38,8 +38,17 @@ export class Router implements RouterModule.RouterInterface{
 
     use(path: string | string[] | RouterModule.middleware): void
     use(path: string | string[] | RouterModule.middleware, ...middleware: any): void {
-        if (typeof path === 'string') {
-            this.register(path, [], middleware, )
+        if (typeof path === 'string' || Array.isArray(path)) {
+            // let middlewares = Array.prototype.slice.call(arguments, 1);
+            this.register(path, [], middleware);
+        } else {
+            // let middlewares = Array.prototype.slice.call(arguments);
+            this.register('/', [], middleware);
+        }
+    }
+
+    routes(){
+        function dispatch(){
         }
     }
 }

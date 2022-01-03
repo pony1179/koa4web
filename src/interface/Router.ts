@@ -11,7 +11,8 @@ export namespace RouterModule {
         stack: Layer[],
         allowedMethods: method[],
         register: register,
-        use: use
+        use: use,
+        // routes:
         // get: get,
         // post: post,
         // put: put,
@@ -24,7 +25,7 @@ export namespace RouterModule {
 
     export interface params {}
 
-    export type register = (path: string | string[], methods: method[], middleware: middleware | middleware[], opts?: opts) => void
+    export type register = (path: string | string[], methods: method[], middleware: middleware | middleware[], opts: opts) => void
 
     export type get = (path: string | string[], middleware: middleware, opts?: opts) => void
 

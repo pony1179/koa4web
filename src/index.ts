@@ -1,8 +1,8 @@
 import  {AppModule} from  './interface/App'
 import compose from './lib/compose'
-import eventEmitter from 'event-emitter';
+import eventEmitter from 'event-emitter4browser';
 export default class Application implements AppModule.App {
-    middlewares: AppModule.middleware[] = []
+    middlewares: AppModule.middleware[] = [];
     constructor() {
     }
 
@@ -19,11 +19,12 @@ export default class Application implements AppModule.App {
     //     }
     // }
     
+
     use(handle: AppModule.middleware) {
         this.middlewares.push(handle);
     }
 
-    callback(ctx: Object) {
+    callback(ctx: AppModule.Context) {
         compose(this.middlewares)(ctx);
     }
 

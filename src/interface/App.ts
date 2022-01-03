@@ -1,3 +1,4 @@
+import {RouterModule} from './Router';
 export namespace AppModule {
     export interface App {
         middlewares: middleware[]     
@@ -12,6 +13,14 @@ export namespace AppModule {
     // }
 
     export type middleware = (ctx: Object, next: Function) => void
+
+    export interface Context {
+        method: RouterModule.method,
+        path: string,
+        payload?: any,
+        query: any,
+        params: any
+    }
 }
 
 
