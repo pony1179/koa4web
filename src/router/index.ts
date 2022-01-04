@@ -1,5 +1,8 @@
 import { RouterModule } from '../interface/Router'
+import { AppModule } from '../interface/App'
 import { Layer } from './layer';
+
+
 const methodConfig: RouterModule.method[] = ['GET', 'POST', 'PUT', 'DELETE']
 export class Router implements RouterModule.RouterInterface{
     stack: RouterModule.Layer[] = [];
@@ -38,7 +41,7 @@ export class Router implements RouterModule.RouterInterface{
 
     use(path: string | string[] | RouterModule.middleware): void
     use(path: string | string[] | RouterModule.middleware, ...middleware: any): void {
-        if (typeof path === 'string' || Array.isArray(path)) {
+        if (path && (typeof path === 'string' || Array.isArray(path))) {
             // let middlewares = Array.prototype.slice.call(arguments, 1);
             this.register(path, [], middleware);
         } else {
@@ -47,8 +50,54 @@ export class Router implements RouterModule.RouterInterface{
         }
     }
 
+    get(path: string | string[], ...middleware: any) {
+        if (typeof path !== 'string') {
+            throw new Error('the path must be string');
+        }
+        if (path.length === 0) {
+            path = '/'
+        }
+        this.register(path, ['GET'], middleware);
+    }
+
+    post(path: string | string[], ...middleware: any) {
+        if (typeof path !== 'string') {
+            throw new Error('the path must be string');
+        }
+        if (path.length === 0) {
+            path = '/'
+        }
+        this.register(path, ['POST'], middleware);
+    }
+
+    put(path: string | string[], ...middleware: any) {
+        if (typeof path !== 'string') {
+            throw new Error('the path must be string');
+        }
+        if (path.length === 0) {
+            path = '/'
+        }
+        this.register(path, ['PUT'], middleware);
+    }
+
+    delete(path: string | string[], ...middleware: any) {
+        if (typeof path !== 'string') {
+            throw new Error('the path must be string');
+        }
+        if (path.length === 0) {
+            path = '/'
+        }
+        this.register(path, ['DELETE'], middleware);
+    }
+
     routes(){
-        function dispatch(){
+        let router = this;
+        function dispatch(ctx: AppModule.Context){
+            let method = ctx.method
+            router.stack.forEach(route => {
+                // route.
+            });
+            // for (this.)
         }
     }
 }

@@ -1,4 +1,4 @@
-import {RouterModule} from './Router';
+import { Request, Response } from 'request4browser';
 export namespace AppModule {
     export interface App {
         middlewares: middleware[]     
@@ -12,14 +12,11 @@ export namespace AppModule {
     //     handle: Function
     // }
 
-    export type middleware = (ctx: Object, next: Function) => void
+    export type middleware = (ctx: Context, next: Function) => void
 
     export interface Context {
-        method: RouterModule.method,
-        path: string,
-        payload?: any,
-        query: any,
-        params: any
+        req: Request,
+        res: Response
     }
 }
 

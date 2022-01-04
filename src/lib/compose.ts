@@ -7,7 +7,7 @@ export default function compose(middlewares: AppModule.middleware[]) {
         }
     }
 
-    return function (ctx: Object) {
+    return function (ctx: AppModule.Context) {
         let index = -1;
         function dispatch(i = 0):Promise<any> {
             if (i <= index) return Promise.reject(new Error('next() called multiple times'));

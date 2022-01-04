@@ -1,5 +1,5 @@
 import compose from './lib/compose';
-import eventEmitter from 'event-emitter';
+import eventEmitter from 'event-emitter4browser';
 export default class Application {
     constructor() {
         this.middlewares = [];

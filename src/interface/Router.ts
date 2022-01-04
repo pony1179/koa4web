@@ -3,7 +3,8 @@ export namespace RouterModule {
         methods: method[],
         path: path,
         match: match,
-        middlewares: middleware[]
+        middlewares: middleware[],
+        pathSplitArr: string[]
     }
     export interface RouterInterface {
         opts: opts,

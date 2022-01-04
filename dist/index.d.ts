@@ -1,9 +1,9 @@
-import { App } from './interface/App';
-export default class Application implements App.AppInterface {
-    middlewares: App.middleware[];
+import { AppModule } from './interface/App';
+export default class Application implements AppModule.App {
+    middlewares: AppModule.middleware[];
     constructor();
-    use(handle: App.middleware): void;
-    callback(ctx: Object): void;
+    use(handle: AppModule.middleware): void;
+    callback(ctx: AppModule.Context): void;
     listen(): void;
 }
 //# sourceMappingURL=index.d.ts.map

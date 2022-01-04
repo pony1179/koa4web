@@ -17,7 +17,9 @@
   },
   "homepage": "https://github.com/BioforestChain/koa4browser#readme",
   "dependencies": {
-    "event-emitter4browser": "^1.0.0",
-    "request4browser": "^1.0.0"
-  }
+    "event-emitter4browser": "^1.0.0"
+  },
+  "workspaces": [
+    "../request4browser"
+  ]
 }
