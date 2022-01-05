@@ -1,8 +1,10 @@
 import eventEmitter from 'event-emitter4browser';
-import { Request } from 'request4browser';
+import { RequestImpl } from 'request4browser';
 import  { AppModule } from  './interface/App'
 import compose from './lib/compose'
 import Context from './lib/context'
+
+export { Router } from './router';
 
 export default class Application implements AppModule.App {
     middlewares: AppModule.middleware[] = [];
@@ -23,8 +25,14 @@ export default class Application implements AppModule.App {
     // }
     
 
-    use(handle: AppModule.middleware) {
-        this.middlewares.push(handle);
+    use(handle: AppModule.middleware | AppModule.middleware[]) {
+        if (Array.isArray(handle)) {
+            handle.forEach(ele => {
+                this.use.bind(this, ele);
+            })
+        } else {
+            this.middlewares.push(handle);
+        }
     }
 
     callback(ctx: AppModule.Context) {
@@ -35,7 +43,7 @@ export default class Application implements AppModule.App {
      * 处理请求 
      * @param req 
      */
-    handleRequest(req: Request) {
+    handleRequest(req: RequestImpl) {
         let ctx = new Context(req);
         this.callback.call(this, ctx);
     }

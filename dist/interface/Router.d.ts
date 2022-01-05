@@ -4,6 +4,7 @@ export declare namespace RouterModule {
         path: path;
         match: match;
         middlewares: middleware[];
+        pathSplitArr: string[];
     }
     interface RouterInterface {
         opts: opts;

@@ -1,18 +1,13 @@
-import { RouterModule } from './Router';
-import { RequestOption } from '@types/request4browser';
+import { RequestImpl, ResponseImpl } from 'request4browser';
 export declare namespace AppModule {
     interface App {
         middlewares: middleware[];
         use(handle: middleware): void;
     }
-    type middleware = (ctx: Object, next: Function) => void;
+    type middleware = (ctx: Context, next: Function) => void;
     interface Context {
-        req: RequestOption;
-        method: RouterModule.method;
-        path: string;
-        payload?: any;
-        query: any;
-        params: any;
+        req: RequestImpl;
+        res: ResponseImpl;
     }
 }
 //# sourceMappingURL=App.d.ts.map

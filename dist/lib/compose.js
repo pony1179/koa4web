@@ -4,7 +4,7 @@ export default function compose(middlewares) {
             throw new TypeError('Middleware must be composed of functions');
         }
     }
-    return function (ctx) {
+    return function (ctx, next) {
         let index = -1;
         function dispatch(i = 0) {
             if (i <= index)
@@ -12,6 +12,8 @@ export default function compose(middlewares) {
             index = i;
             let fn = middlewares[i];
             if (i === middlewares.length)
+                fn = next;
+            if (!fn)
                 return Promise.resolve();
             try {
                 return Promise.resolve(fn(ctx, dispatch.bind(null, i + 1)));
@@ -23,21 +25,3 @@ export default function compose(middlewares) {
         return dispatch(0);
     };
 }
-// let ctx = {}
-// async function A(ctx: Object, next: Function) {
-//     console.log('start A')
-//     await next();
-//     console.log('end A')
-// }
-// async function B(ctx: Object, next: Function) {
-//     console.log('start B')
-//     await next();
-//     console.log('end B')
-// }
-// async function C(ctx: Object, next: Function) {
-//     console.log('start C')
-//     await next();
-//     console.log('end C')
-// }
-// let middlewares = [A, B, C]
-// compose(middlewares)(ctx);

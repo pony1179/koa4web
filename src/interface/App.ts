@@ -1,4 +1,4 @@
-import { Request, Response } from 'request4browser';
+import { RequestImpl, ResponseImpl } from 'request4browser';
 export namespace AppModule {
     export interface App {
         middlewares: middleware[]     
@@ -15,8 +15,8 @@ export namespace AppModule {
     export type middleware = (ctx: Context, next: Function) => void
 
     export interface Context {
-        req: Request,
-        res: Response
+        req: RequestImpl,
+        res: ResponseImpl
     }
 }
 
