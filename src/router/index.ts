@@ -77,7 +77,8 @@ export class Router implements RouterModule.RouterInterface{
 
     routes(){
         let router = this;
-        async function dispatch(ctx: AppModule.Context, next: AppModule.middleware){
+        return (ctx: AppModule.Context, next: AppModule.middleware) => {
+            console.log('nextnext', next);
             let method = ctx.req.method;
             let path = ctx.req.path;
             let matchedMiddlewares:AppModule.middleware[] = [];
@@ -88,6 +89,5 @@ export class Router implements RouterModule.RouterInterface{
             });
             compose(matchedMiddlewares)(ctx, next);
         }
-        return dispatch;
     }
 }

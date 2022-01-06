@@ -12,6 +12,6 @@ export declare class Router implements RouterModule.RouterInterface {
     post(path: string | string[], ...middleware: any): void;
     put(path: string | string[], ...middleware: any): void;
     delete(path: string | string[], ...middleware: any): void;
-    routes(): (ctx: AppModule.Context, next: AppModule.middleware) => Promise<void>;
+    routes(): (ctx: AppModule.Context, next: AppModule.middleware) => void;
 }
 //# sourceMappingURL=index.d.ts.map

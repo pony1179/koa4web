@@ -35,8 +35,14 @@ export default class Application implements AppModule.App {
         }
     }
 
-    callback(ctx: AppModule.Context) {
-        compose(this.middlewares)(ctx);
+    callback = async (ctx: AppModule.Context) => {
+        console.log('首次调用compose')
+        let fn = compose(this.middlewares);
+        console.log('完成了middleware组装')
+        fn(ctx).then(()=>{
+            console.log('啥时候出发呢')
+            eventEmitter.emit(`response-${ctx.req.requestId}`, ctx.res)
+        });
     }
 
     /**
@@ -45,7 +51,7 @@ export default class Application implements AppModule.App {
      */
     handleRequest(req: RequestImpl) {
         let ctx = new Context(req);
-        this.callback.call(this, ctx);
+        this.callback(ctx);
     }
 
     /**
