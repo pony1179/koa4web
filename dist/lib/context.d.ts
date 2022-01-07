@@ -1,8 +1,10 @@
-import { AppModule } from '../interface/App';
-import { RequestImpl, ResponseImpl } from 'request4browser';
+import { AppModule } from '../typings/App';
 export default class Context implements AppModule.Context {
-    req: RequestImpl;
-    res: ResponseImpl;
-    constructor(req: RequestImpl, res?: ResponseImpl);
+    req: AppModule.RequestImpl;
+    res: AppModule.ResponseImpl;
+    _body?: any;
+    constructor(req: AppModule.RequestImpl, res?: AppModule.ResponseImpl);
+    get body(): any;
+    set body(value: any);
 }
 //# sourceMappingURL=context.d.ts.map

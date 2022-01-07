@@ -15,11 +15,10 @@ export default class Application {
     constructor() {
         this.middlewares = [];
         this.callback = (ctx) => __awaiter(this, void 0, void 0, function* () {
-            console.log('首次调用compose');
             let fn = compose(this.middlewares);
-            console.log('完成了middleware组装');
+            // debugger;
             fn(ctx).then(() => {
-                console.log('啥时候出发呢');
+                // debugger;
                 eventEmitter.emit(`response-${ctx.req.requestId}`, ctx.res);
             });
         });

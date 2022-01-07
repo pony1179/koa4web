@@ -1,5 +1,5 @@
-import { RouterModule } from '../interface/Router'
-import { AppModule } from '../interface/App'
+import { RouterModule } from '../typings/Router'
+import { AppModule } from '../typings/App'
 import { Layer } from './layer';
 import compose from '../lib/compose';
 
@@ -78,7 +78,7 @@ export class Router implements RouterModule.RouterInterface{
     routes(){
         let router = this;
         return (ctx: AppModule.Context, next: AppModule.middleware) => {
-            console.log('nextnext', next);
+            // debugger;
             let method = ctx.req.method;
             let path = ctx.req.path;
             let matchedMiddlewares:AppModule.middleware[] = [];
@@ -87,7 +87,7 @@ export class Router implements RouterModule.RouterInterface{
                     matchedMiddlewares = matchedMiddlewares.concat(route.middlewares);
                 }
             });
-            compose(matchedMiddlewares)(ctx, next);
+            return compose(matchedMiddlewares)(ctx, next);
         }
     }
 }

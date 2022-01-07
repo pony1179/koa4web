@@ -66,7 +66,7 @@ export class Router {
     routes() {
         let router = this;
         return (ctx, next) => {
-            console.log('nextnext', next);
+            // debugger;
             let method = ctx.req.method;
             let path = ctx.req.path;
             let matchedMiddlewares = [];
@@ -75,7 +75,7 @@ export class Router {
                     matchedMiddlewares = matchedMiddlewares.concat(route.middlewares);
                 }
             });
-            compose(matchedMiddlewares)(ctx, next);
+            return compose(matchedMiddlewares)(ctx, next);
         };
     }
 }

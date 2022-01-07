@@ -1,5 +1,4 @@
-import { RequestImpl } from 'request4browser';
-import { AppModule } from './interface/App';
+import { AppModule } from './typings/App';
 import Context from './lib/context';
 export { Router } from './router';
 export default class Application implements AppModule.App {
@@ -11,7 +10,7 @@ export default class Application implements AppModule.App {
      * 处理请求
      * @param req
      */
-    handleRequest(req: RequestImpl): void;
+    handleRequest(req: AppModule.RequestImpl): void;
     /**
      * 启动监听
      */

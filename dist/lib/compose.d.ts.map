@@ -1,1 +1,1 @@
-{"version":3,"file":"compose.d.ts","sourceRoot":"","sources":["../../src/lib/compose.ts"],"names":[],"mappings":"AAAA,OAAO,EAAC,SAAS,EAAC,MAAM,kBAAkB,CAAA;AAC1C,MAAM,CAAC,OAAO,UAAU,OAAO,CAAC,WAAW,EAAE,SAAS,CAAC,UAAU,EAAE,SAQzC,UAAU,OAAO,2DA0B1C"}
+{"version":3,"file":"compose.d.ts","sourceRoot":"","sources":["../../src/lib/compose.ts"],"names":[],"mappings":"AAAA,OAAO,EAAC,SAAS,EAAC,MAAM,gBAAgB,CAAA;AACxC,MAAM,CAAC,OAAO,UAAU,OAAO,CAAC,WAAW,EAAE,SAAS,CAAC,UAAU,EAAE,SAMzC,UAAU,OAAO,2DAwB1C"}

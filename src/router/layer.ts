@@ -1,4 +1,4 @@
-import { RouterModule } from '../interface/Router'
+import { RouterModule } from '../typings/Router'
 export class Layer implements RouterModule.Layer{
     methods: RouterModule.method[];
     path: RouterModule.path;

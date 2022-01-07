@@ -1,6 +1,5 @@
 import eventEmitter from 'event-emitter4browser';
-import { RequestImpl } from 'request4browser';
-import  { AppModule } from  './interface/App'
+import  { AppModule } from  './typings/App'
 import compose from './lib/compose'
 import Context from './lib/context'
 
@@ -36,11 +35,10 @@ export default class Application implements AppModule.App {
     }
 
     callback = async (ctx: AppModule.Context) => {
-        console.log('首次调用compose')
         let fn = compose(this.middlewares);
-        console.log('完成了middleware组装')
+        // debugger;
         fn(ctx).then(()=>{
-            console.log('啥时候出发呢')
+            // debugger;
             eventEmitter.emit(`response-${ctx.req.requestId}`, ctx.res)
         });
     }
@@ -49,7 +47,7 @@ export default class Application implements AppModule.App {
      * 处理请求 
      * @param req 
      */
-    handleRequest(req: RequestImpl) {
+    handleRequest(req: AppModule.RequestImpl) {
         let ctx = new Context(req);
         this.callback(ctx);
     }

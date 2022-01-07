@@ -1,5 +1,5 @@
-import { RouterModule } from '../interface/Router';
-import { AppModule } from '../interface/App';
+import { RouterModule } from '../typings/Router';
+import { AppModule } from '../typings/App';
 export declare class Router implements RouterModule.RouterInterface {
     stack: RouterModule.Layer[];
     allowedMethods: RouterModule.method[];
@@ -12,6 +12,6 @@ export declare class Router implements RouterModule.RouterInterface {
     post(path: string | string[], ...middleware: any): void;
     put(path: string | string[], ...middleware: any): void;
     delete(path: string | string[], ...middleware: any): void;
-    routes(): (ctx: AppModule.Context, next: AppModule.middleware) => void;
+    routes(): (ctx: AppModule.Context, next: AppModule.middleware) => Promise<any>;
 }
 //# sourceMappingURL=index.d.ts.map
