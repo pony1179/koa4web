@@ -77,11 +77,11 @@ export class Router implements RouterModule.RouterInterface{
 
     routes(){
         let router = this;
-        return (ctx: AppModule.Context, next: AppModule.middleware) => {
+        return (ctx: AppModule.Context, next: AppModule.Middleware) => {
             // debugger;
             let method = ctx.req.method;
             let path = ctx.req.path;
-            let matchedMiddlewares:AppModule.middleware[] = [];
+            let matchedMiddlewares:AppModule.Middleware[] = [];
             router.stack.forEach(route => {
                 if (route.match(path, method)) {
                     matchedMiddlewares = matchedMiddlewares.concat(route.middlewares);

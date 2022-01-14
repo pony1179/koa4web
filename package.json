@@ -18,6 +18,6 @@
   "homepage": "https://github.com/BioforestChain/koa4browser#readme",
   "types":"./dist/typings/index.d.ts",
   "workspaces":[
-    "../event-emitter"
+    "../event-emitter4browser"
   ]
 }

@@ -1,8 +1,7 @@
 export namespace AppModule {
     export interface App {
-        middlewares: middleware[]     
-        use(handle: middleware):void   
-        // use(path: string, handle: Function):void
+        middlewares: Middleware[],     
+        use(path: string | Middleware | Middleware[], ...handle: any):void
     }
     // export type Data = {
     //     path:string;
@@ -11,7 +10,13 @@ export namespace AppModule {
     //     handle: Function
     // }
 
-    export type middleware = (ctx: Context, next: Function) => void
+    export type Middleware = (ctx: Context, next: Function) => void
+
+    // 中间件层
+    export type Layer = {
+        path: string,
+        middlewares: Middleware[]
+    }
 
     export interface Context {
         req: RequestImpl,

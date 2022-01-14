@@ -6,31 +6,38 @@ import Context from './lib/context'
 export { Router } from './router';
 
 export default class Application implements AppModule.App {
-    middlewares: AppModule.middleware[] = [];
+    middlewares: AppModule.Middleware[] = [];
+    layers: AppModule.Layer[] = [];
     constructor() {
     }
 
-    // use(handle: Function):void;
-    // use(path: string, handle: Function):void;
-    // use(path: string | Function, handle?: Function): void{
-    //     if (arguments.length === 1) {
-    //         this.middleware.push(arguments[0]);
-    //     } else {
-    //         this.middleware.push({
-    //             path: arguments[0],
-    //             handle: arguments[1]
-    //         });
-    //     }
-    // }
-    
-
-    use(handle: AppModule.middleware | AppModule.middleware[]) {
-        if (Array.isArray(handle)) {
-            handle.forEach(ele => {
-                this.use.bind(this, ele);
-            })
+    use(path: string | AppModule.Middleware | AppModule.Middleware[], ...middlewares: any): void {
+        if (typeof path === 'string') {
+            if (path) {
+                if (middlewares.length > 0) {
+                    this.layers.push({
+                        path,
+                        middlewares
+                    })
+                }
+            } else {
+                this.layers.push({
+                    path: '/',
+                    middlewares
+                })
+            }
         } else {
-            this.middlewares.push(handle);
+            if (Array.isArray(path)) {
+                path.forEach(ele => {
+                    this.use.bind(this, ele);
+                })
+            } else {
+                middlewares.unshift(path);
+                this.layers.push({
+                    path: '/',
+                    middlewares: middlewares
+                });
+            }
         }
     }
 
@@ -43,12 +50,43 @@ export default class Application implements AppModule.App {
         });
     }
 
+    match(layer: AppModule.Layer, path: string) {
+        let pathSplitArr = path.split('/');
+        pathSplitArr.forEach((ele, index) => {
+            if (ele === '') {
+                pathSplitArr.splice(index,1)
+            }
+        })
+        let layerPathSplitArr = layer.path.split('/');
+        layerPathSplitArr.forEach((ele, index) => {
+            if (ele === '') {
+                layerPathSplitArr.splice(index,1)
+            }
+        })
+
+        for (let i = 0; i < layerPathSplitArr.length; i++) {
+            if (layerPathSplitArr[i] !== pathSplitArr[i] && layerPathSplitArr[i].indexOf(':') !== 0) {
+                return false
+            }
+        }
+        return true;
+    }
+
     /**
      * 处理请求 
      * @param req 
      */
     handleRequest(req: AppModule.RequestImpl) {
         let ctx = new Context(req);
+        let path = ctx.req.path;
+        ctx.path = path;
+        ctx.method = ctx.req.method;
+        this.middlewares = [];
+        this.layers.forEach(layer => {
+            if (this.match(layer,path)) {
+                this.middlewares = this.middlewares.concat(layer.middlewares);
+            }
+        });
         this.callback(ctx);
     }
 
